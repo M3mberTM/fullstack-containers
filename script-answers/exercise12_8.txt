@@ -1,0 +1,106 @@
+Script started on 2025-07-29 17:01:10+02:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="188" LINES="49"]
+]0;richardsvajdlenka@RichardSvajdlenka: ~/fullstack/script-answers[01;32mrichardsvajdlenka@RichardSvajdlenka[00m:[01;34m~/fullstack/script-answers[00m$ docker container ls
+CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS                                           NAMES
+31f8f59d914b   mongo     "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes   0.0.0.0:3456->27017/tcp, [::]:3456->27017/tcp   todo-backend-mongo-1
+]0;richardsvajdlenka@RichardSvajdlenka: ~/fullstack/script-answers[01;32mrichardsvajdlenka@RichardSvajdlenka[00m:[01;34m~/fullstack/script-answers[00m$ docker exec -it todo-backend-mongo-1 bash
+[?2004hroot@31f8f59d914b:/# mongosh
+[?2004l]0;mongosh mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000Current Mongosh Log ID:	6888e248daee1a4a7189b03c
+Connecting to:		[1m[32mmongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.5.6[0m
+Using MongoDB:		8.0.12
+[1m[33mUsing Mongosh[0m:		2.5.6
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+
+To help improve our products, anonymous usage data is collected and sent to MongoDB periodically (https://www.mongodb.com/legal/privacy-policy).
+You can opt-out by running the disableTelemetry() command.
+
+[1G[0J [1G[?2004h[1G[0Jtest> [7Gshow dbs
+Uncaught [1m[31mMongoServerError[0m[1m[31m[Unauthorized][0m: Command listDatabases requires authentication
+[1G[0Jtest> [7Gmongo -u root -p example
+Uncaught:
+[1m[31mSyntaxError[0m: Missing semicolon. (1:8)
+
+[0m[31m[1m>[22m[39m[90m 1 |[39m mongo [33m-[39mu root [33m-[39mp example
+ [90m   |[39m         [31m[1m^[22m[39m
+ [90m 2 |[39m[0m
+
+[1G[0Jtest> [7G-u root -p example
+Uncaught:
+[1m[31mSyntaxError[0m: Missing semicolon. (1:2)
+
+[0m[31m[1m>[22m[39m[90m 1 |[39m [33m-[39mu root [33m-[39mp example
+ [90m   |[39m   [31m[1m^[22m[39m
+ [90m 2 |[39m[0m
+
+[1G[0Jtest> [7Gexit
+[?2004l[?2004hroot@31f8f59d914b:/# mongosh -u root -o p example
+[?2004l]0;mongosh mongodb://<credentials>@127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000Current Mongosh Log ID:	6888e33bb76cceaeb189b03c
+Connecting to:		[1m[32mmongodb://<credentials>@127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.5.6[0m
+Using MongoDB:		8.0.12
+[1m[33mUsing Mongosh[0m:		2.5.6
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+[1G[0J [1G[?2004h[1m[33m------[0m
+   [1m[33mThe server generated these startup warnings when booting[0m
+   2025-07-29T14:58:50.928+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2025-07-29T14:58:51.315+00:00: For customers running the current memory allocator, we suggest changing the contents of the following sysfsFile
+   2025-07-29T14:58:51.315+00:00: For customers running the current memory allocator, we suggest changing the contents of the following sysfsFile
+   2025-07-29T14:58:51.315+00:00: We suggest setting the contents of sysfsFile to 0.
+   2025-07-29T14:58:51.315+00:00: vm.max_map_count is too low
+   2025-07-29T14:58:51.315+00:00: We suggest setting swappiness to 0 or 1, as swapping can cause performance problems.
+[1m[33m------[0m
+
+[1G[0Jtest> [7Gshow dbs
+[1madmin[0m         100.00 KiB
+[1mconfig[0m        108.00 KiB
+[1mlocal[0m          72.00 KiB
+[1mthe_database[0m   56.00 KiB
+[1G[0Jtest> [7Guse the_database
+switched to db the_database
+[1G[0Jthe_database> [15Gshow collections
+[1mtodos[0m
+[1G[0Jthe_database> [15Gdb.todos.find()[1G[0Jthe_database> db.todos.find([29GP[1G[0Jthe_database> db.todos.find([29G{})
+[
+  {
+    _id: ObjectId([32m'6888d77179a43d151a89b03d'[39m),
+    text: [32m'Something'[39m,
+    done: [33mtrue[39m
+  },
+  {
+    _id: ObjectId([32m'6888d77179a43d151a89b03e'[39m),
+    text: [32m'Learn about containers'[39m,
+    done: [33mfalse[39m
+  }
+]
+[1G[0Jthe_database> [15Gdb.todos.inserOne[1G[0Jthe_database> db.todos.inserOn[31G[1G[0Jthe_database> db.todos.inserO[30G[1G[0Jthe_database> db.todos.inser[29GtOne({text[33mtext[39m: [32m'[39m[32mI[39m[32mn[39m[32mc[39m[32mr[39m[32me[39m[32ma[39m[32mt[39m[32me[39m[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [32m'Increat[39m[49G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [32m'Increa[39m[48G[32ms[39m[32me[39m [32mt[39m[32mh[39m[32me[39m [32mn[39m[32mu[39m[32mm[39m[32mb[39m[32me[39m[32mr[39m[32ms[39m [1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [32m'Increase the numbers[39m[62G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [32m'Increase the number[39m[61G[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [32m'Increase the numbe[39m[60G [1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [32m'Increase the numbe[39m[60G[32mr[39m [32mo[39m[32mf[39m [32mt[39m[32mo[39m[32mo[39m[32ml[39m[32ms[39m [32mi[39m[32mn[39m[32mm[39m[1G[0Jthe_database> db.todos.insertOne({[33mtext[39m: [32m'Increase the number of tools in[39m[73G [32mm[39m[32my[39m [32mt[39m[32mo[39m[32mo[39m[32ml[39m[32mb[39m[32me[39m[32ml[39m[32mt[39m[32m'[39m, d[36mdo[39mdone: fals[33mfalse[39m})
+{
+  acknowledged: [33mtrue[39m,
+  insertedId: ObjectId([32m'6888e3b1b76cceaeb189b03d'[39m)
+}
+[1G[0Jthe_database> [15Gdb.todos.find({})
+[
+  {
+    _id: ObjectId([32m'6888d77179a43d151a89b03d'[39m),
+    text: [32m'Something'[39m,
+    done: [33mtrue[39m
+  },
+  {
+    _id: ObjectId([32m'6888d77179a43d151a89b03e'[39m),
+    text: [32m'Learn about containers'[39m,
+    done: [33mfalse[39m
+  },
+  {
+    _id: ObjectId([32m'6888e3b1b76cceaeb189b03d'[39m),
+    text: [32m'Increase the number of tools in my toolbelt'[39m,
+    done: [33mfalse[39m
+  }
+]
+[1G[0Jthe_database> [15Gexit
+[?2004l[?2004hroot@31f8f59d914b:/# exit
+[?2004lexit
+]0;richardsvajdlenka@RichardSvajdlenka: ~/fullstack/script-answers[01;32mrichardsvajdlenka@RichardSvajdlenka[00m:[01;34m~/fullstack/script-answers[00m$ exit
+exit
+
+Script done on 2025-07-29 17:07:49+02:00 [COMMAND_EXIT_CODE="0"]
